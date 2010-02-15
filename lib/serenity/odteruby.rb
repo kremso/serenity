@@ -21,7 +21,6 @@ module Serenity
     def convert template
       src = "_buf = '';"
       template.each do |line|
-        puts "LINE: #{line}"
         pos = 0
         append_rest = true
         line.scan(EMBEDDED_PATTERN) do |indicator, code|
@@ -29,7 +28,7 @@ module Serenity
           text = line[pos...m.begin(0)]
           pos  = m.end(0)
           if !indicator              # <% %>
-            src << code << ";"
+            src << escape_code(code) << ";"
             append_rest = false
             break
           else
@@ -47,7 +46,6 @@ module Serenity
           src << " _buf << '" << escape_text(rest) << "';"
         else
           rest = pos == 0 ? line : line[pos..-1]   # ruby1.9
-          puts "Discarding REST: #{rest}"
         end
       end
       src << "\n_buf.to_s\n"       # postamble
@@ -55,6 +53,10 @@ module Serenity
 
     def escape_text text
       text.gsub(/['\\]/, '\\\\\&')
+    end
+
+    def escape_code code
+      code.gsub('&apos;', "'")
     end
 
   end

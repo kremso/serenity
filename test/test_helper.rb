@@ -24,3 +24,7 @@ def load_from_file(file)
   end
   content
 end
+
+def fixture name
+  File.join(File.dirname(__FILE__), '..', 'fixtures', name)
+end

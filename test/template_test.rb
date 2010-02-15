@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 require 'fileutils'
 
 module Serenity
@@ -14,7 +14,7 @@ module Serenity
         title = 'captain'
 
         assert_nothing_raised do
-          template = Template.new '../fixtures/variables.odt', 'output_variables.odt'
+          template = Template.new(fixture('variables.odt'), 'output_variables.odt')
           template.process binding
         end
       end
@@ -23,7 +23,7 @@ module Serenity
         crew = %w{'River', 'Jay', 'Wash'}
 
         assert_nothing_raised do
-          template = Template.new '../fixtures/loop.odt', 'output_loop.odt'
+          template = Template.new(fixture('loop.odt'), 'output_loop.odt')
           template.process binding
         end
       end
@@ -32,7 +32,7 @@ module Serenity
         ships = [Ship.new('Firefly', 'transport'), Ship.new('Colonial', 'battle')]
 
         assert_nothing_raised do
-          template = Template.new '../fixtures/loop_table.odt', 'output_loop_table.odt'
+          template = Template.new(fixture('loop_table.odt'), 'output_loop_table.odt')
           template.process binding
         end
       end
@@ -41,7 +41,7 @@ module Serenity
         persons = [Person.new('Malcolm', 'captain'), Person.new('River', 'psychic'), Person.new('Jay', 'gunslinger')]
 
         assert_nothing_raised do
-          template = Template.new '../fixtures/advanced.odt', 'output_advanced.odt'
+          template = Template.new(fixture('advanced.odt'), 'output_advanced.odt')
           template.process binding
         end
       end

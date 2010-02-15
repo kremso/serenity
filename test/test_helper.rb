@@ -14,6 +14,9 @@ class SampleObject
   end
 end
 
+Ship = Struct.new(:name, :type)
+Person = Struct.new(:name, :skill)
+
 def load_from_file(file)
   content = ''
   File.open(File.join(File.dirname(__FILE__), '..', 'fixtures', file), 'r') do |f|

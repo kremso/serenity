@@ -1,7 +1,12 @@
 require 'test_helper'
+require 'fileutils'
 
 module Serenity
   class TemplateTest < Test::Unit::TestCase
+
+    def teardown
+      FileUtils.rm(Dir['*.odt'])
+    end
 
     context "a template" do
       should "replace simple variable in odt file" do

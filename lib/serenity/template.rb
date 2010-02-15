@@ -13,7 +13,7 @@ module Serenity
     def process context
       Zip::ZipFile.open(@template) do |zipfile|
         content = zipfile.read('content.xml')
-        odteruby = OdtEruby.new(XmlReader.new(content), true)
+        odteruby = OdtEruby.new(XmlReader.new(content))
         out = odteruby.evaluate context
 
         file = Tempfile.new("serenity_#{rand(1000000)}.xml") do |f|

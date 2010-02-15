@@ -1,12 +1,13 @@
 module Serenity
   class OdtEruby
+    include Debug
 
     EMBEDDED_PATTERN = /\{%(=+|\#)?(.*?)-?%\}/m
 
-    def initialize template, debug = false
+    def initialize template
       @src = convert template
-      if debug
-        File.open('serenity_debug.rb', 'a') do |f|
+      if debug?
+        File.open(File.join(debug_dir, "serenity_debug.rb"), 'a') do |f|
           f << @src
         end
       end

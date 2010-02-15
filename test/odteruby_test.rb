@@ -12,8 +12,8 @@ module Serenity
       name = 'test_name'
       type = 'test_type'
       rows = []
-      rows << SampleObject.new('test_name_1', 'test_type_1')
-      rows << SampleObject.new('test_name_2', 'test_type_2')
+      rows << Ship.new('test_name_1', 'test_type_1')
+      rows << Ship.new('test_name_2', 'test_type_2')
       binding
     end
 

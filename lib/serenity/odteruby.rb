@@ -42,13 +42,13 @@ module Serenity
         end
 
         if append_rest
-          rest = pos == 0 ? line : line[pos..-1]   # ruby1.9
+          rest = pos == 0 ? line : line[pos..-1]
           src << " _buf << '" << escape_text(rest) << "';"
         else
-          rest = pos == 0 ? line : line[pos..-1]   # ruby1.9
+          rest = pos == 0 ? line : line[pos..-1]
         end
       end
-      src << "\n_buf.to_s\n"       # postamble
+      src << "\n_buf.to_s\n"
     end
 
     def escape_text text

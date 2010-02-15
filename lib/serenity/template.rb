@@ -16,7 +16,7 @@ module Serenity
         odteruby = OdtEruby.new(XmlReader.new(content), true)
         out = odteruby.evaluate context
 
-        file = File.open('serenity.xml', 'w') do |f|
+        file = Tempfile.open("serenity_#{rand(1000000)}.xml") do |f|
           f << out
         end
 

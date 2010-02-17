@@ -6,7 +6,7 @@ task :default => [:spec]
 Spec::Rake::SpecTask.new("spec")
 
 spec = Gem::Specification.new do |s|
-  s.name = %q{serenity}
+  s.name = %q{serenity-odt}
   s.version = "0.1.0"
 
   s.authors = ["Tomas Kramar"]
@@ -16,7 +16,7 @@ spec = Gem::Specification.new do |s|
     Very similar to .erb files.
   EOF
   s.email = %q{kramar.tomas@gmail.com}
-  s.files = Dir.glob('lib/**/*.rb') + %w{README.md Rakefile serenity.gemspec LICENSE}
+  s.files = Dir.glob('lib/**/*.rb') + %w{README.md Rakefile serenity-odt.gemspec LICENSE}
   s.has_rdoc = false
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
@@ -26,10 +26,10 @@ spec = Gem::Specification.new do |s|
 end
 
 task :gemspec do
-  File.open("serenity.gemspec", "w") { |f| f << spec.to_ruby }
+  File.open("serenity-odt.gemspec", "w") { |f| f << spec.to_ruby }
 end
 
 task :gem => :gemspec do
-  system "gem build serenity.gemspec"
+  system "gem build serenity-odt.gemspec"
 end
 

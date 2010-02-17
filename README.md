@@ -9,7 +9,9 @@ Serenity is best demonstrated with a picture. The first picture shows the templa
 Installation
 ============
 
-    gem install serenity
+    gem install serenity-odt
+
+Yeah, serenity is already taken on gemcutter.
 
 Creating templates
 ===================

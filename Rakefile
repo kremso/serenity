@@ -1,10 +1,6 @@
 require 'rake'
-require 'rake/testtask'
+require 'spec/rake/spectask'
 
-task :default => [:test_units]
+task :default => [:spec]
 
-Rake::TestTask.new("test_units") { |t|
-  t.pattern = 'test/*_test.rb'
-  t.verbose = true
-  t.warning = true
-}
+Spec::Rake::SpecTask.new("spec")

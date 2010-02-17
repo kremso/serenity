@@ -23,6 +23,7 @@ spec = Gem::Specification.new do |s|
   s.summary = %q{Embedded ruby for OpenOffice Text Document (.odt) files}
   s.test_files = Dir.glob('spec/**/*.rb') + Dir.glob('fixtures/*.odt')
   s.add_dependency('rubyzip', '>= 0.9.1')
+  s.add_development_dependency('rspec', '>= 1.2.9')
 end
 
 task :gemspec do

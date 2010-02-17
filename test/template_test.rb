@@ -5,7 +5,7 @@ module Serenity
   class TemplateTest < Test::Unit::TestCase
 
     def teardown
-      FileUtils.rm(Dir['*.odt'])
+      #FileUtils.rm(Dir['*.odt'])
     end
 
     context "a template" do
@@ -42,6 +42,15 @@ module Serenity
 
         assert_nothing_raised do
           template = Template.new(fixture('advanced.odt'), 'output_advanced.odt')
+          template.process binding
+        end
+      end
+
+      should "loop and generate table rows" do
+        ships = [Ship.new('Firefly', 'transport'), Ship.new('Colonial', 'battle')]
+
+        assert_nothing_raised do
+          template = Template.new(fixture('table_rows.odt'), 'output_table_rows.odt')
           template.process binding
         end
       end

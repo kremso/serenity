@@ -16,12 +16,13 @@ spec = Gem::Specification.new do |s|
     Very similar to .erb files.
   EOF
   s.email = %q{kramar.tomas@gmail.com}
-  s.files = Dir.glob('lib/**/*.rb') + %w{README.md Rakefile serenity.gemspec}
+  s.files = Dir.glob('lib/**/*.rb') + %w{README.md Rakefile serenity.gemspec LICENSE}
   s.has_rdoc = false
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Embedded ruby for OpenOffice Text Document (.odt) files}
   s.test_files = Dir.glob('spec/**/*.rb') + Dir.glob('fixtures/*.odt')
+  s.add_dependency('rubyzip', '>= 0.9.1')
 end
 
 task :gemspec do

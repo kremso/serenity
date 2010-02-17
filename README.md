@@ -15,8 +15,8 @@ Creating templates
 ===================
 
 Templates are created directly in OpenOffice. Ruby code is enclosed in special markup:
- * `{%= %}` is for ruby code which should be output to the final document. `to_s` is applied to anything found inside this markup
- * `{% %}` is for everything else &mdash; loops, ifs, ends and any other non-outputting code
+* `{%= %}` is for ruby code which should be output to the final document. `to_s` is applied to anything found inside this markup
+* `{% %}` is for everything else &mdash; loops, ifs, ends and any other non-outputting code
 
 Any special formatting should by applied directly on the markup. E.g. if you need to ouput the value of variable title in bold font, write `{%= title %}`, select in in OpenOffice and make it bold. See the showcase.odt for more examples.
 
@@ -54,5 +54,5 @@ The key parts are `include Serenity::Generator` and render_odt. The data for the
 Contact
 =======
 
-kramar[dot]tomas[at]gmail.com &mdash; - I love the attention
+kramar[dot]tomas[at]gmail.com &mdash; I love the attention
 

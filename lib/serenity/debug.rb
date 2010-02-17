@@ -1,7 +1,7 @@
 module Serenity
   module Debug
     def debug?
-      true
+      false
     end
 
     def debug_file_path

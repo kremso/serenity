@@ -2,9 +2,9 @@ Serenity is an embedded ruby for OpenOffice documents (.odt files). You provide 
 
 Serenity is best demonstrated with a picture. The first picture shows the template with the ruby code, next image shows the generated document. The template, output and the sample script can be found in the showcase directory.
 
-![Serenity template](http://github.com/kremso/serenity/tree/master/showcase/imgs/serenity_template?raw=true)
+![Serenity template](http://github.com/kremso/serenity/blob/master/showcase/imgs/serenity_template?raw=true)
 
-![Generated document](http://github.com/kremso/serenity/tree/master/showcase/imgs/serenity_output?raw=true)
+![Generated document](http://github.com/kremso/serenity/blob/master/showcase/imgs/serenity_output?raw=true)
 
 Installation
 ============

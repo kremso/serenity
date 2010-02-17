@@ -7,7 +7,7 @@ Spec::Rake::SpecTask.new("spec")
 
 spec = Gem::Specification.new do |s|
   s.name = %q{serenity}
-  s.version = "1.0.0"
+  s.version = "0.1.0"
 
   s.authors = ["Tomas Kramar"]
   s.description = <<-EOF

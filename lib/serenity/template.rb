@@ -16,9 +16,9 @@ module Serenity
         odteruby = OdtEruby.new(XmlReader.new(content))
         out = odteruby.evaluate context
 
-        file = File.open("serenity.xml", 'w') do |f|
-          f << out
-        end
+        file = Tempfile.new("serenity")
+        file << out
+        file.close
 
         zipfile.replace('content.xml', file.path)
       end

@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'serenity/line'
 require 'serenity/debug'
 require 'serenity/node_type'

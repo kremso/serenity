@@ -16,12 +16,17 @@ module Serenity
       text.inject('') { |memo, line| memo += line.strip } unless text.nil?
     end
 
+    def run_spec template, expected, context=@context
+      content = OdtEruby.new(XmlReader.new template)
+      result = content.evaluate context
+
+      squeeze(result).should == squeeze(expected)
+    end
+
     it 'should escape single quotes properly' do
       expected = template = "<text:p>It's a 'quote'</text:p>"
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate @context
 
-      squeeze(expected).should == squeeze(result)
+      run_spec template, expected
     end
 
     it 'should properly escape special XML characters ("<", ">", "&")' do
@@ -29,10 +34,7 @@ module Serenity
       description = 'This will only hold true if length < 1 && var == true or length > 1000'
       expected = "<text:p>This will only hold true if length &lt; 1 &amp;&amp; var == true or length &gt; 1000</text:p>"
 
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate binding
-
-      squeeze(expected).should == squeeze(result)
+      run_spec template, expected, binding
     end
 
     it 'should replace variables with values from context' do
@@ -48,42 +50,15 @@ module Serenity
         <text:p text:style-name="Text_1_body"/>
       EOF
 
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate @context
-
-      squeeze(expected).should == squeeze(result)
+      run_spec template, expected
     end
 
     it 'should replace multiple variables on one line' do
       template = '<text:p text:style-name="Text_1_body">{%= type %} and {%= name %}</text:p>'
       expected = '<text:p text:style-name="Text_1_body">test_type and test_name</text:p>'
 
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate @context
-
-      squeeze(expected).should == squeeze(result)
+      run_spec template, expected
     end
-=begin
-    should 'replace a LOOP construct with variables' do
-      template = <<-EOF
-        <text:p text:style-name="Text_1_body">{% for row in rows do %}</text:p>
-          <text:p text:style-name="Text_1_body">{%= row.name %}</text:p>
-          <text:p text:style-name="Text_1_body">{%= row.type %}</text:p>
-        <text:p text:style-name="Text_1_body">{% end %}</text:p>
-      EOF
-
-      expected = <<-EOF
-          <text:p text:style-name="Text_1_body">test_name_1</text:p>
-          <text:p text:style-name="Text_1_body">test_type_1</text:p>
-          <text:p text:style-name="Text_1_body">test_name_2</text:p>
-          <text:p text:style-name="Text_1_body">test_type_2</text:p>
-      EOF
-
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate @context
-      assert_equal expected, result
-    end
-=end
 
     it 'should remove empty tags after a control structure processing' do
       template = <<-EOF
@@ -112,10 +87,7 @@ module Serenity
         </table:table>
       EOF
 
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate @context
-
-      squeeze(expected).should == squeeze(result)
+      run_spec template, expected
     end
   end
 end

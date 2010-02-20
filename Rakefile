@@ -1,5 +1,6 @@
 require 'rake'
 require 'spec/rake/spectask'
+require 'rake/gempackagetask'
 
 task :default => [:spec]
 
@@ -16,7 +17,7 @@ spec = Gem::Specification.new do |s|
     Very similar to .erb files.
   EOF
   s.email = %q{kramar.tomas@gmail.com}
-  s.files = Dir.glob('lib/**/*.rb') + %w{README.md Rakefile serenity-odt.gemspec LICENSE}
+  s.files = Dir.glob('lib/**/*.rb') + %w{README.md Rakefile LICENSE}
   s.has_rdoc = false
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
@@ -26,11 +27,6 @@ spec = Gem::Specification.new do |s|
   s.add_development_dependency('rspec', '>= 1.2.9')
 end
 
-task :gemspec do
-  File.open("serenity-odt.gemspec", "w") { |f| f << spec.to_ruby }
+Rake::GemPackageTask.new(spec) do |p|
+  p.gem_spec = spec
 end
-
-task :gem => :gemspec do
-  system "gem build serenity-odt.gemspec"
-end
-

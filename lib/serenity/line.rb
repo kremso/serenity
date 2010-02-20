@@ -49,7 +49,7 @@ module Serenity
 
   class StringLine < CodeLine
     def to_buf
-      " _buf << (" << escape_code(@text) << ").to_s;"
+      " _buf << (" << escape_code(@text) << ").to_s.escape_xml;"
     end
   end
 end

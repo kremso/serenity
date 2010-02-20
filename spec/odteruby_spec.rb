@@ -16,6 +16,25 @@ module Serenity
       text.inject('') { |memo, line| memo += line.strip } unless text.nil?
     end
 
+    it 'should escape single quotes properly' do
+      expected = template = "<text:p>It's a 'quote'</text:p>"
+      content = OdtEruby.new(XmlReader.new template)
+      result = content.evaluate @context
+
+      squeeze(expected).should == squeeze(result)
+    end
+
+    it 'should properly escape special XML characters ("<", ">", "&")' do
+      template = "<text:p>{%= description %}</text:p>"
+      description = 'This will only hold true if length < 1 && var == true or length > 1000'
+      expected = "<text:p>This will only hold true if length &lt; 1 &amp;&amp; var == true or length &gt; 1000</text:p>"
+
+      content = OdtEruby.new(XmlReader.new template)
+      result = content.evaluate binding
+
+      squeeze(expected).should == squeeze(result)
+    end
+
     it 'should replace variables with values from context' do
       template = <<-EOF
         <text:p text:style-name="Text_1_body">{%= name %}</text:p>

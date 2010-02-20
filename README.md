@@ -10,7 +10,31 @@ The second line in the template is `{%= title%}` what means: output the value of
 
 You can now take that template, provide the data and generate the final document:
 
-<script src="http://gist.github.com/309633.js?file=serenity-sample.rb"></script>
+    require 'rubygems'
+    require 'serenity'
+
+    class Showcase
+      include Serenity::Generator
+
+      Person = Struct.new(:name, :items)
+      Item = Struct.new(:name, :usage)
+
+      def generate_showcase
+        @title = 'Serenity inventory'
+
+        mals_items = [Item.new('Moses Brothers Self-Defense Engine Frontier Model B', 'Lock and load')]
+        mal = Person.new('Malcolm Reynolds', mals_items)
+
+        jaynes_items = [Item.new('Vera', 'Callahan full-bore auto-lock with a customized trigger, double cartridge and thorough gauge'),
+                        Item.new('Lux', 'Ratatata'),
+                        Item.new('Knife', 'Cut-throat')]
+        jayne = Person.new('Jayne Cobb', jaynes_items)
+
+        @crew = [mal, jayne]
+
+        render_odt 'showcase.odt'
+      end
+    end
 
 The key parts are `include Serenity::Generator` and render_odt. The data for the template must be provided as instance variables.
 

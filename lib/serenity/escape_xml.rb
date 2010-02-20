@@ -9,5 +9,6 @@ class String
     gsub!(Regexp.union(*regexp_fragments)) do |match|
       key_value_pairs.detect{|k,v| k =~ match}[1]
     end
+    self
   end
 end

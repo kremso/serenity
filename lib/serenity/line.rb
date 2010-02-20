@@ -41,7 +41,6 @@ module Serenity
 
     def escape_code code
       code.mgsub! [[/&apos;/, "'"], [/&gt;/, '>'], [/&lt/, '<'], [/&quot;/, '"']]
-      code
     end
   end
 

@@ -1,7 +1,6 @@
 class String
   def escape_xml
     mgsub!([[/&/, '&amp;'], [/</, '&lt;'], [/>/, '&gt;']])
-    self
   end
 
   def mgsub!(key_value_pairs=[].freeze)

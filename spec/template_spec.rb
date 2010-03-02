@@ -44,5 +44,13 @@ module Serenity
       template = Template.new(fixture('table_rows.odt'), 'output_table_rows.odt')
       lambda {template.process binding}.should_not raise_error
     end
+
+    it "should parse the header" do
+      title = 'captain'
+
+      template = Template.new(fixture('header.odt'), 'output_header.odt')
+      template.process(binding)
+      'output_header.odt'.should contain_in('styles.xml', 'captain')
+    end
   end
 end

@@ -11,16 +11,19 @@ module Serenity
     end
 
     def process context
+      tmpfiles = []
       Zip::ZipFile.open(@template) do |zipfile|
-        content = zipfile.read('content.xml')
-        odteruby = OdtEruby.new(XmlReader.new(content))
-        out = odteruby.evaluate context
+        %w(content.xml styles.xml).each do |xml_file|
+          content = zipfile.read(xml_file)
+          odteruby = OdtEruby.new(XmlReader.new(content))
+          out = odteruby.evaluate(context)
 
-        file = Tempfile.new("serenity")
-        file << out
-        file.close
+          tmpfiles << (file = Tempfile.new("serenity"))
+          file << out
+          file.close
 
-        zipfile.replace('content.xml', file.path)
+          zipfile.replace(xml_file, file.path)
+        end
       end
     end
   end

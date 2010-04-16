@@ -22,6 +22,10 @@ module Serenity
       StringLine.new txt
     end
 
+    def self.literal txt
+      LiteralLine.new txt
+    end
+
   end
 
   class TextLine < Line
@@ -49,5 +53,12 @@ module Serenity
       " _buf << (" << escape_code(@text) << ").to_s.escape_xml;"
     end
   end
+
+  class LiteralLine < CodeLine
+    def to_buf
+      " _buf << (" << escape_code(@text) << ").to_s;"
+    end
+  end
+
 end
 

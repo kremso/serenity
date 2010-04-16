@@ -2,7 +2,7 @@ module Serenity
   class OdtEruby
     include Debug
 
-    EMBEDDED_PATTERN = /\{%(=+)?(.*?)-?%\}/m
+    EMBEDDED_PATTERN = /\{%([=%]+)?(.*?)-?%\}/m
 
     def initialize template
       @src = convert template
@@ -61,10 +61,12 @@ module Serenity
         pos  = m.end(0)
         src << Line.text(middle) unless middle.empty?
 
-        if !indicator              # <% %>
+        if !indicator            # <% %>
           src << Line.code(code)
-        else                       # <%= %>
+        elsif indicator == '='   # <%= %>
           src << Line.string(code)
+        elsif indicator == '%'   # <%% %>
+          src << Line.literal(code)
         end
       end
 

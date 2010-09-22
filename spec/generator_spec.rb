@@ -8,7 +8,7 @@ module Serenity
 
     it 'should make context from instance variables and run the provided template' do
       class GeneratorClient
-        include Generator
+        include Serenity::Generator
 
         def generate_odt
           @crew = ['Mal', 'Inara', 'Wash', 'Zoe']

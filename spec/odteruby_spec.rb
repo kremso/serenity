@@ -13,7 +13,7 @@ module Serenity
     end
 
     def squeeze text
-      text.inject('') { |memo, line| memo += line.strip } unless text.nil?
+      text.each_char.inject('') { |memo, line| memo += line.strip } unless text.nil?
     end
 
     def run_spec template, expected, context=@context

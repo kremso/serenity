@@ -10,3 +10,7 @@
 2010-03-30 Thomas Ritz
   * Support changes in the header
   * new matcher "contain_in"
+
+2010-09-22 Tomas Kramar, version 0.2.0
+  * ruby 1.9 support
+  * use instance variables in templates

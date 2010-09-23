@@ -14,7 +14,7 @@ Serenity is best demonstrated with an example. The first picture shows the templ
 
 The image above is a screenshot of showcase.odt from the [showcase](http://github.com/kremso/serenity/blob/master/showcase) directory. It's a regular OpenOffice document with ruby code embedded inside a special markup. That ruby code drives the document creation. You can use conditionals, loops, blocks &mdash; in fact, the whole ruby language and you can apply any OpenOffice formatting to the outputted variables or static text.
 
-The second line in the template is `{%= title%}` what means: output the value of variable title. It's bold and big, in fact, it's has the 'Heading 1' style applied. That variable will be replaced in the generated document, but it will still be a 'Heading 1'.
+The second line in the template is `{%= @title%}` what means: output the value of variable title. It's bold and big, in fact, it's has the 'Heading 1' style applied. That variable will be replaced in the generated document, but it will still be a 'Heading 1'.
 
 You can now take that template, provide the data and generate the final document:
 
@@ -44,7 +44,7 @@ You can now take that template, provide the data and generate the final document
       end
     end
 
-The key parts are `include Serenity::Generator` and render_odt. The data for the template must be provided as instance variables.
+The key parts are `include Serenity::Generator` and `render_odt`. The data for the template must be provided as instance variables.
 
 Following picture shows the generated document. It's a screenshot of the showcase_output.odt document from the [showcase](http://github.com/kremso/serenity/blob/master/showcase) directory.
 

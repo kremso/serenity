@@ -1,6 +1,12 @@
 Serenity is an embedded ruby for OpenOffice documents (.odt files). You provide an .odt template with ruby code inside a special markup and the data and Serenity generates the document. If you know erb all of this should sound familiar.
 
+Important Changes
+=================
+
 As of version 0.2.0 serenity is using instance variables in the templates. In previous versions, your instance variables would be converted to local before passing to the template, so while in the code you had `@title = 'Serenity'`, you had to put `{%= title }` in the template to get serenity to work. This has now changed and you need to use instance variables in the templates: `{%= @title }`. Honestly, I don't know why I did it this way in the first place, considering that people are used to instance variables in templates from rails.
+
+Usage
+======
 
 Serenity is best demonstrated with an example. The first picture shows the template with the ruby code, next image shows the generated document. The template, output and the sample script can be found in the showcase directory.
 

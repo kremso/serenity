@@ -67,5 +67,13 @@ module Serenity
       template.process(binding)
       'output_header.odt'.should contain_in('styles.xml', 'captain')
     end
+
+    it 'should parse the footer' do
+      @title = 'captain'
+
+      template = Template.new(fixture('footer.odt'), 'output_footer.odt')
+      template.process(binding)
+      'output_footer.odt'.should contain_in('styles.xml', 'captain')
+    end
   end
 end

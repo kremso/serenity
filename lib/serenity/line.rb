@@ -50,7 +50,11 @@ module Serenity
 
   class StringLine < CodeLine
     def to_buf
-      " _buf << (" << escape_code(@text) << ").to_s.escape_xml;"
+      " _buf << (" << escape_code(@text) << ").to_s.escape_xml.convert_newlines;"
+    end
+
+    def convert_newlines text
+      text.gsub("First line", '<text:line-break>')
     end
   end
 

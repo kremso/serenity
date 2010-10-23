@@ -89,5 +89,14 @@ module Serenity
 
       run_spec template, expected
     end
+
+    it 'should replace \n with soft newlines' do
+      text_with_newline = "First line\nSecond line"
+
+      template = '<text:p text:style-name="P2">{%= text_with_newline %}</text:p>'
+      expected = '<text:p text:style-name="P2">First line <text:line-break/>Second line</text:p>'
+
+      run_spec template, expected, binding
+    end
   end
 end

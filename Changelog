@@ -14,3 +14,7 @@
 2010-09-22 Tomas Kramar, version 0.2.0
   * ruby 1.9 support
   * use instance variables in templates
+
+2010-11-3 Ed Hirgelt, version 0.2.1
+  * do not remove whitespace when processing the template - this was causing
+    problems

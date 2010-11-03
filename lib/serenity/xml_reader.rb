@@ -10,9 +10,9 @@ module Serenity
 
       @src.scan(/<.*?>/) do |node|
         m = Regexp.last_match
-        if m.begin(0) > last_match_pos + 1
+        if m.begin(0) > last_match_pos
           text = @src[last_match_pos...m.begin(0)]
-          yield text.strip, node_type(text) if text.gsub(/\s+/, '') != ''
+          yield text, node_type(text) if text.gsub(/\s+/, '') != ''
         end
 
         last_match_pos = m.end(0)

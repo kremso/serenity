@@ -31,7 +31,7 @@ module Serenity
 
       idx = 0
       reader.each_node do |node, type|
-        expected[idx].text.should == node
+        expected[idx].text.should == node.strip
         expected[idx].type.should == type
         idx += 1
       end

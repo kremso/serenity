@@ -51,7 +51,7 @@ module Serenity
     end
 
     def process_instruction text
-      text = text.strip
+      #text = text.strip
       pos = 0
       src = []
 

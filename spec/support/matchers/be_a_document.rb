@@ -1,5 +1,5 @@
 module Serenity
-  Spec::Matchers.define :be_a_document do
+  RSpec::Matchers.define :be_a_document do
     match do |actual|
       File.exists? actual
     end

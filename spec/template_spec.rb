@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 require 'fileutils'
 
@@ -6,7 +7,7 @@ module Serenity
   describe Template do
 
     after(:each) do
-      FileUtils.rm(Dir['*.odt'])
+    #  FileUtils.rm(Dir['*.odt'])
     end
 
     it "should process a document with simple variable substitution" do
@@ -47,6 +48,13 @@ module Serenity
       ['Malcolm', 'captain', 'River', 'psychic', 'Jay', 'gunslinger'].each do |text|
         'output_advanced.odt'.should contain_in('content.xml', text)
       end
+    end
+
+    it "should process a greek document" do
+      @h = {'ελληνικο' => 'κειμενο'}
+      template = Template.new(fixture('greek.odt'), 'output_greek.odt')
+      template.process binding
+      'output_greek.odt'.should contain_in('content.xml', 'κειμενο')
     end
 
     it "should loop and generate table rows" do

@@ -2,7 +2,7 @@ module Serenity
   class XmlReader
 
     def initialize src
-      @src = src
+      @src = src.force_encoding("UTF-8")
     end
 
     def each_node

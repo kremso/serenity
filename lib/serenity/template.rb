@@ -17,6 +17,7 @@ module Serenity
           content = zipfile.read(xml_file)
           odteruby = OdtEruby.new(XmlReader.new(content))
           out = odteruby.evaluate(context)
+          out.force_encoding Encoding.default_external
 
           tmpfiles << (file = Tempfile.new("serenity"))
           file << out

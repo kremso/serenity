@@ -14,6 +14,7 @@ module Serenity
     end
 
     def evaluate context
+      @src = @src.force_encoding Encoding.default_external
       eval(@src, context)
     end
 

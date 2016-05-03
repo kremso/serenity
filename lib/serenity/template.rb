@@ -15,6 +15,13 @@ module Serenity
       Zip::ZipFile.open(@template) do |zipfile|
         %w(content.xml styles.xml).each do |xml_file|
           content = zipfile.read(xml_file)
+
+          # Images replacement
+          images_replacements = ImagesProcessor.new(content, context).generate_replacements
+          images_replacements.each do |r|
+            zipfile.replace(r.first, r.last)
+          end
+
           odteruby = OdtEruby.new(XmlReader.new(content))
           out = odteruby.evaluate(context)
           out.force_encoding Encoding.default_external

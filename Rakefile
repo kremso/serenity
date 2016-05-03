@@ -8,7 +8,7 @@ Spec::Rake::SpecTask.new("spec")
 
 spec = Gem::Specification.new do |s|
   s.name = %q{serenity-odt}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.authors = ["Tomas Kramar"]
   s.description = <<-EOF
@@ -24,6 +24,7 @@ spec = Gem::Specification.new do |s|
   s.summary = %q{Embedded ruby for OpenOffice Text Document (.odt) files}
   s.test_files = Dir.glob('spec/**/*.rb') + Dir.glob('fixtures/*.odt')
   s.add_dependency('rubyzip', '>= 0.9.1')
+  s.add_dependency('nokogiri', '>= 1.0')
   s.add_development_dependency('rspec', '>= 1.2.9')
 end
 

@@ -1,11 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 module Serenity
-
   Node = Struct.new(:text, :type)
 
   describe XmlReader do
-    it "should stream the xml, tag by tag" do
+    it "streams the xml, tag by tag" do
       xml  = <<-EOF
           <?xml version="1.0" encoding="UTF-8"?><office:document-content><office:scripts/>
           <office:body><text:p style="Standard">This is a sentence</text:p><text:s>{%= yeah %}</text:s></office:body>
@@ -31,11 +30,10 @@ module Serenity
 
       idx = 0
       reader.each_node do |node, type|
-        expected[idx].text.should == node.strip
-        expected[idx].type.should == type
+        expect(node.strip).to eq(expected[idx].text)
+        expect(type).to eq(expected[idx].type)
         idx += 1
       end
     end
   end
 end
-

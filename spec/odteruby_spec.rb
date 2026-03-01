@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 module Serenity
-
   describe OdtEruby do
     before(:each) do
       name = 'test_name'
@@ -12,24 +11,24 @@ module Serenity
       @context = binding
     end
 
-    def squeeze text
+    def squeeze(text)
       text.each_char.inject('') { |memo, line| memo += line.strip } unless text.nil?
     end
 
-    def run_spec template, expected, context=@context
-      content = OdtEruby.new(XmlReader.new template)
-      result = content.evaluate context
+    def run_spec(template, expected, context = @context)
+      content = OdtEruby.new(XmlReader.new(template))
+      result = content.evaluate(context)
 
-      squeeze(result).should == squeeze(expected)
+      expect(squeeze(result)).to eq(squeeze(expected))
     end
 
-    it 'should escape single quotes properly' do
+    it 'escapes single quotes properly' do
       expected = template = "<text:p>It's a 'quote'</text:p>"
 
       run_spec template, expected
     end
 
-    it 'should properly escape special XML characters ("<", ">", "&")' do
+    it 'properly escapes special XML characters ("<", ">", "&")' do
       template = "<text:p>{%= description %}</text:p>"
       description = 'This will only hold true if length < 1 && var == true or length > 1000'
       expected = "<text:p>This will only hold true if length &lt; 1 &amp;&amp; var == true or length &gt; 1000</text:p>"
@@ -37,7 +36,7 @@ module Serenity
       run_spec template, expected, binding
     end
 
-    it 'should replace variables with values from context' do
+    it 'replaces variables with values from context' do
       template = <<-EOF
         <text:p text:style-name="Text_1_body">{%= name %}</text:p>
         <text:p text:style-name="Text_1_body">{%= type %}</text:p>
@@ -53,14 +52,14 @@ module Serenity
       run_spec template, expected
     end
 
-    it 'should replace multiple variables on one line' do
+    it 'replaces multiple variables on one line' do
       template = '<text:p text:style-name="Text_1_body">{%= type %} and {%= name %}</text:p>'
       expected = '<text:p text:style-name="Text_1_body">test_type and test_name</text:p>'
 
       run_spec template, expected
     end
 
-    it 'should remove empty tags after a control structure processing' do
+    it 'removes empty tags after a control structure processing' do
       template = <<-EOF
         <table:table style="Table_1">
           <table:row style="Table_1_A1">
@@ -90,7 +89,7 @@ module Serenity
       run_spec template, expected
     end
 
-    it 'should replace \n with soft newlines' do
+    it 'replaces \n with soft newlines' do
       text_with_newline = "First line\nSecond line"
 
       template = '<text:p text:style-name="P2">{%= text_with_newline %}</text:p>'

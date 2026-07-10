@@ -98,5 +98,14 @@ module Serenity
 
       run_spec template, expected, binding
     end
+
+    # Regression guard for the O(n^2) -> O(n) change in `convert`: a document with many nodes
+    # must still compile to identical output. (See benchmark/convert_benchmark.rb for timings.)
+    it 'compiles documents with many nodes without altering output' do
+      paragraphs = (1..500).map { |i| "<text:p text:style-name=\"P#{i}\">line #{i}</text:p>" }.join
+      template = "<office:text>#{paragraphs}</office:text>"
+
+      run_spec template, template
+    end
   end
 end

@@ -2,7 +2,6 @@ $:.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 
 require 'rubygems'
 require 'serenity'
-require 'ruby-debug'
 require 'rspec'
 
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|f| require f}
@@ -17,5 +16,7 @@ end
 RSpec.configure do |config|
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
+  config.expect_with(:rspec) { |c| c.syntax = [:should, :expect] }
+  config.mock_with(:rspec)   { |c| c.syntax = [:should, :expect] }
 end
 

@@ -40,13 +40,26 @@ module Serenity
     end
 
     it "should process an advanced document" do
-      @persons = [Person.new('Malcolm', 'captain'), Person.new('River', 'psychic'), Person.new('Jay', 'gunslinger')]
+      @persons = [
+        Person.new('Malcolm', 'captain',    10.5, 20.3, 30.1),
+        Person.new('River',   'psychic',    40.2, 50.7, 60.4),
+        Person.new('Jay',     'gunslinger', 70.8, 80.9, 90.6)
+      ]
 
       template = Template.new(fixture('advanced.odt'), 'output_advanced.odt')
       template.process binding
 
       ['Malcolm', 'captain', 'River', 'psychic', 'Jay', 'gunslinger'].each do |text|
         'output_advanced.odt'.should contain_in('content.xml', text)
+      end
+
+      # Each person gets their own embedded chart with their name and column values
+      { 'Object 1' => ['Malcolm', '10.5', '20.3', '30.1'],
+        'Object 2' => ['River',   '40.2', '50.7', '60.4'],
+        'Object 3' => ['Jay',     '70.8', '80.9', '90.6'] }.each do |obj, values|
+        values.each do |val|
+          'output_advanced.odt'.should contain_in("#{obj}/content.xml", val)
+        end
       end
     end
 

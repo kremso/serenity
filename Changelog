@@ -29,3 +29,15 @@
     previously failed on any modern setup because rubyzip removed the "zip/zip"
     require path and renamed Zip::ZipFile to Zip::File.
   * tests: run on RSpec 3 and modern Ruby.
+
+2026-07-10 version 0.3.0
+  * feature: embedded objects (e.g. charts) placed inside a loop are now
+    duplicated once per iteration, each evaluated against that iteration's
+    binding. References in the draw:frame are rewritten to unique "Object N"
+    directories, supporting files (meta.xml, ObjectReplacements) are copied and
+    the new entries are registered in META-INF/manifest.xml. Ported from #18
+    (thanks luizloja).
+  * bugfix: String#escape_xml and #convert_newlines no longer raise
+    FrozenError on Ruby 2.7+ when handed a frozen string. They now use
+    non-mutating gsub instead of gsub!, so the substitution is always applied
+    (previously the only proposed workaround silently skipped it).

@@ -1,7 +1,7 @@
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "serenity-odt"
-  s.version     = "0.2.3"
+  s.version     = "0.3.0"
   s.authors     = "kremso"
   s.email       = ""
   s.homepage    = "https://github.com/kremso/serenity"

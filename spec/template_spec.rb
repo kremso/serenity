@@ -96,5 +96,13 @@ module Serenity
       template.process(binding)
       'output_footer.odt'.should contain_in('styles.xml', 'captain')
     end
+
+    it 'should process the meta.xml file' do
+      @title = 'captain'
+
+      template = Template.new(fixture('meta.odt'), 'output_meta.odt')
+      template.process(binding)
+      'output_meta.odt'.should contain_in('meta.xml', 'captain')
+    end
   end
 end

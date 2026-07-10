@@ -1,14 +1,14 @@
 module Serenity
   RSpec::Matchers.define :be_a_document do
     match do |actual|
-      File.exists? actual
+      File.exist? actual
     end
 
-    failure_message_for_should do |actual|
+    failure_message do |actual|
       "expected that a file #{actual} would exist"
     end
 
-    failure_message_for_should_not do |actual|
+    failure_message_when_negated do |actual|
       "expected that a file #{actual} would not exist"
     end
 

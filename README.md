@@ -18,7 +18,9 @@ duplicated once per iteration. If you drop a chart inside a `{% for %}` loop,
 each iteration gets its own copy of that object, evaluated against that
 iteration's data &mdash; so every row of your loop can carry its own chart. The
 object references are rewritten to unique `Object N` directories and the
-`META-INF/manifest.xml` is updated automatically.
+`META-INF/manifest.xml` is updated automatically. See
+[showcase/charts_showcase.rb](showcase/charts_showcase.rb) for a runnable
+example that gives every crew member their own chart.
 
 0.3.0 also fixes a `FrozenError` that could be raised on Ruby 2.7+ when the data
 being escaped was a frozen string.

@@ -71,7 +71,7 @@ module Serenity
           end
         end
 
-        %w(content.xml styles.xml).each do |xml_file|
+        %w(content.xml styles.xml meta.xml).each do |xml_file|
           content = zipfile.read(xml_file)
 
           # Images replacement

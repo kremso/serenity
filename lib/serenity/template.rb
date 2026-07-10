@@ -1,7 +1,15 @@
-require 'zip/zip'
+begin
+  require 'zip'          # rubyzip >= 1.0
+rescue LoadError
+  require 'zip/zip'      # rubyzip 0.9.x (legacy)
+end
 require 'fileutils'
+require 'tempfile'
 
 module Serenity
+  # rubyzip renamed Zip::ZipFile to Zip::File in 1.0; support both.
+  ZipFile = defined?(::Zip::File) ? ::Zip::File : ::Zip::ZipFile
+
   class Template
     attr_accessor :template
 
@@ -12,7 +20,7 @@ module Serenity
 
     def process context
       tmpfiles = []
-      Zip::ZipFile.open(@template) do |zipfile|
+      ZipFile.open(@template) do |zipfile|
         %w(content.xml styles.xml).each do |xml_file|
           content = zipfile.read(xml_file)
 

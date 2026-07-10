@@ -30,6 +30,11 @@
     require path and renamed Zip::ZipFile to Zip::File.
   * tests: run on RSpec 3 and modern Ruby.
 
+2026-07-10 version 0.4.0
+  * feature: meta.xml is now processed too, so template markup placed in the
+    document metadata (e.g. a templated dc:title) is filled in like anywhere
+    else. Implements the enhancement from #5 (thanks leavengood).
+
 2026-07-10 version 0.3.0
   * feature: embedded objects (e.g. charts) placed inside a loop are now
     duplicated once per iteration, each evaluated against that iteration's

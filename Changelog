@@ -18,3 +18,14 @@
 2010-11-3 Ed Hirgelt, version 0.2.1
   * do not remove whitespace when processing the template - this was causing
     problems
+
+2026-07-10 version 0.2.3
+  * performance: OdtEruby#convert is now O(n) instead of O(n^2) in the number of
+    template nodes. It was appending each node's compiled lines with
+    "buffer << arr; buffer.flatten!", rescanning the whole (growing) buffer on
+    every node; switched to "buffer.concat(arr)". Large ODT bodies compile
+    dramatically faster (e.g. ~37x at 10k nodes).
+  * compatibility: works with rubyzip >= 1.0 (Zip::File). Requiring the gem
+    previously failed on any modern setup because rubyzip removed the "zip/zip"
+    require path and renamed Zip::ZipFile to Zip::File.
+  * tests: run on RSpec 3 and modern Ruby.

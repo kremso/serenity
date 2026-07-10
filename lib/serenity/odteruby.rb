@@ -22,6 +22,9 @@ module Serenity
 
     def convert template
       src = "_buf = '';"
+      # `buffer`/`buffer_next` stay flat arrays of Line objects, so appending with `concat`
+      # keeps them flat in O(k). (The old `buffer << arr; buffer.flatten!` rescanned the whole
+      # buffer on every node, making `convert` O(n^2) in the number of template nodes.)
       buffer = []
       buffer_next = []
 
@@ -33,8 +36,7 @@ module Serenity
           elsif is_nonpair_tag? node
             next
           else
-            buffer << buffer_next
-            buffer.flatten!
+            buffer.concat(buffer_next)
             buffer_next = []
           end
         end
@@ -42,8 +44,7 @@ module Serenity
         if type == NodeType::CONTROL
           buffer_next = process_instruction(node)
         else
-          buffer << process_instruction(node)
-          buffer.flatten!
+          buffer.concat(process_instruction(node))
         end
       end
 

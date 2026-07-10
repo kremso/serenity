@@ -5,6 +5,24 @@ Important Changes
 
 As of version 0.2.0 serenity is using instance variables in the templates. In previous versions, your instance variables would be converted to local before passing to the template, so while in the code you had `@title = 'Serenity'`, you had to put `{%= title }` in the template to get serenity to work. This has now changed and you need to use instance variables in the templates: `{%= @title }`. Honestly, I don't know why I did it this way in the first place, considering that people are used to instance variables in templates from rails.
 
+What's new
+==========
+
+**0.4.0** &mdash; `meta.xml` is now processed too. You can put template markup in
+the document metadata (for example a templated `dc:title`) and it will be filled
+in just like the body. So a document whose title is `{%= @title %}` will end up
+with the title you pass in.
+
+**0.3.0** &mdash; embedded objects (such as charts) placed inside a loop are now
+duplicated once per iteration. If you drop a chart inside a `{% for %}` loop,
+each iteration gets its own copy of that object, evaluated against that
+iteration's data &mdash; so every row of your loop can carry its own chart. The
+object references are rewritten to unique `Object N` directories and the
+`META-INF/manifest.xml` is updated automatically.
+
+0.3.0 also fixes a `FrozenError` that could be raised on Ruby 2.7+ when the data
+being escaped was a frozen string.
+
 Usage
 ======
 
@@ -66,6 +84,10 @@ Templates are created directly in OpenOffice. Ruby code is enclosed in special m
 + `{% %}` is for everything else &mdash; loops, ifs, ends and any other non-outputting code
 
 Any special formatting should by applied directly on the markup. E.g. if you need to ouput the value of variable title in bold font, write `{%= title %}`, select in in OpenOffice and make it bold. See the showcase.odt for more examples.
+
+The same markup works in the document metadata (File &rarr; Properties) and inside
+embedded objects such as charts. Put a chart inside a `{% for %}` loop and each
+iteration gets its own chart filled with that iteration's data.
 
 Contact
 =======
